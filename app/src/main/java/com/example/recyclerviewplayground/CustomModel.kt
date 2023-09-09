@@ -23,6 +23,12 @@ object MockModel{
         Model("Getting weird", image3),
     )
 
+    val list = arrayListOf<Model>().apply {
+        for (i in 0..100) {
+            add(Model("Item $i" , image1))
+        }
+    }
+
 }
 
 
