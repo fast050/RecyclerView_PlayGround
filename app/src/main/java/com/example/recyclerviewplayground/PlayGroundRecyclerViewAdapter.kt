@@ -1,6 +1,7 @@
 package com.example.recyclerviewplayground
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recyclerviewplayground.databinding.ItemRecyclerBinding
 
-class PlayGroundRecyclerViewAdapter : ListAdapter<Model, PlayGroundRecyclerViewAdapter.CustomViewHolder>(BaseDiffUtilCallBack()) {
+class PlayGroundRecyclerViewAdapter(private val context: MainActivity) : ListAdapter<Model, PlayGroundRecyclerViewAdapter.CustomViewHolder>(BaseDiffUtilCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         return CustomViewHolder(ItemRecyclerBinding.inflate(LayoutInflater.from(parent.context),parent,false))
@@ -34,6 +35,11 @@ class PlayGroundRecyclerViewAdapter : ListAdapter<Model, PlayGroundRecyclerViewA
             }
 
             binding.textTv.text = item.title
+
+            binding.drag.setOnTouchListener { _, _ ->
+                context.startDragging(this)
+                return@setOnTouchListener true
+            }
 
         }
     }
